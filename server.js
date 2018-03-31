@@ -1,3 +1,4 @@
+//Req all uses
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
@@ -21,3 +22,32 @@ app.use(bodyParser.json());
 app.use(morgan('dev'));
 
 app.use('/api',todoRoutes);
+
+// app.get('/',(rer,res)=>
+// {
+//     res.json(
+//         {
+//     issucess : true
+//         }
+//     );
+// }
+// )
+
+app.set('secret',config.secret);
+
+
+//below is the code for the default page at the start page of angular
+app.use(express.static(__dirname + '/dist'));
+// app.use(function(req,res)
+// {
+//    res.sendfile(__dirname + './dist/index.html');
+// }
+// )
+
+app.use((req,res)=>
+{
+    res.sendfile(__dirname + '/dist/index.html');
+})
+
+app.listen(port);
+console.log('Use API routes http://localhost:'+ port);
